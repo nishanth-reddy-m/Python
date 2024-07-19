@@ -1,0 +1,27 @@
+from datetime import *
+import time
+timestamp = 0
+weeks = ['mon','tue','wed','thu','fri',"sat"]
+d = date.fromtimestamp(timestamp)
+today = datetime.today()
+now = time.localtime()
+print('Today:',today.year,today.month,today.day)
+print("Date:", d)
+print(date(2024,1,1))
+print(d.replace(2002,1,22))
+print(date.fromisoformat('19700101'))
+print(d.weekday(),d.isoweekday())
+print(datetime.today())
+print(datetime.now())
+print(datetime.now(UTC))
+print(d.strftime('%d/%m/%Y - %H:%M:%S'))
+print(time.asctime(now))
+print(today.timestamp())
+print(datetime.now().strftime("%Y/%B/%d %H:%M:%S"))
+print(time.strftime("%Y/%B/%d %H:%M:%S"))
+strptime = datetime.strptime('22/01/2002','%d/%m/%Y')
+print(strptime)
+delta = timedelta(seconds=6000000)
+delta += timedelta(weeks=6)
+print(delta.days)
+print(datetime.now()+timedelta(hours=3))

@@ -1,0 +1,3 @@
+https://smart-lockers.onrender.com/
+It is a web and IoT-based project designed to allow users to securely store their valuable items in automated lockers via a user-friendly web application. 
+It utilizes Flask for web server implementation, MongoDB for database management, SMTP for email notifications, and Arduino for controlling locker actions. 
