@@ -72,7 +72,7 @@ class LinkedList:
         itr = self.head
         while itr:
             if itr.data == value:
-                self.insert_at(count,data)
+                self.insert_at(count+1,data)
                 return
             count += 1
             itr = itr.next
