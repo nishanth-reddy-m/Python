@@ -16,7 +16,7 @@ class LinkedList:
         while itr.next:
             itr = itr.next
         itr.next = Node(data,None)
-    def insert(self, *data):
+    def extend(self, *data):
         for values in data:
             self.insert_at_last(values)
     def __iterate(self):
@@ -67,15 +67,44 @@ class LinkedList:
                     break
                 count += 1
                 itr = itr.next
-
+    def insert_after(self,value,data):
+        count = 0
+        itr = self.head
+        while itr:
+            if itr.data == value:
+                self.insert_at(count,data)
+                return
+            count += 1
+            itr = itr.next
+        raise ValueError('Data not found')
+    def remove(self,data):
+        count = 0
+        itr = self.head
+        while itr:
+            if itr.data == data:
+                self.remove_at(count)
+                return
+            count += 1
+            itr = itr.next
+        raise ValueError('Data not found')
             
     def print(self):
         print(' -> '.join(list(self.__iterate())))
 
 ll = LinkedList()
-ll.insert(1,2,3,4,5,6,7,8,9,10)
 ll.print()
-ll.remove_at(5)
+ll.extend(2,3,4)
 ll.print()
-ll.insert_at(5,6)
+ll.insert_at_first(1)
 ll.print()
+ll.insert_at_last(10)
+ll.print()
+ll.insert_after(10,5)
+ll.print()
+ll.remove(10)
+ll.print()
+ll.remove_at(0)
+ll.print()
+ll.insert_at(0,1)
+ll.print()
+print(ll.length())
