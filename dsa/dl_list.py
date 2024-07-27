@@ -14,6 +14,21 @@ class DoubleLinkedList:
             node = Node(data=data,next = self.head)
             self.head.prev = node
             self.head = node
+    def get(self,index):
+        if index < 0 or index > self.length():
+            raise IndexError("Invalid Index")
+        count = 0
+        itr = self.head
+        while itr:
+            if count == index:
+                return itr.data
+            count += 1
+            itr = itr.next
+    def get_all(self):
+        itr = self.head
+        while itr:
+            yield itr.data
+            itr = itr.next
     def insert_at_last(self,data):
         if self.head is None:
             self.insert_at_first(data)
@@ -58,8 +73,11 @@ class DoubleLinkedList:
         if index < 0 or index >= self.length():
             raise IndexError("Invalid Index")
         if index == 0:
-            self.head = self.head.next
-            self.head.prev = None
+            if self.head.prev:
+                self.head = self.head.next
+                self.head.prev = None
+                return
+            self.head = None
             return
         if index == self.length() - 1:
             count = 0
@@ -95,7 +113,7 @@ class DoubleLinkedList:
             count += 1
             itr = itr.next
         return count
-    def __forward(self):
+    def forward(self):
         if self.head is None:
             print("List is empty")
             return
@@ -104,7 +122,7 @@ class DoubleLinkedList:
             while itr:
                 yield str(itr.data)
                 itr = itr.next
-    def __reverse(self):
+    def reverse(self):
         if self.head is None:
             print("List is empty")
             return
@@ -117,31 +135,33 @@ class DoubleLinkedList:
                 itr = itr.prev
     def print(self,reverse=False):
         if reverse:
-            print(' <- '.join(list(self.__reverse())))
+            print(' <- '.join(list(self.reverse())))
         else:
-            print(' -> '.join(list(self.__forward())))
+            print(' -> '.join(list(self.forward())))
                 
-
-dl = DoubleLinkedList()
-dl.extend(2,3,4)
-dl.print()
-dl.print(True)
-dl.insert_at_first(1)
-dl.print()
-dl.print(True)
-dl.insert_at_last(5)
-dl.print()
-dl.print(True)
-dl.insert_at(4,6)
-dl.print()
-dl.print(True)
-dl.remove(6)
-dl.print()
-dl.print(True)
-dl.insert_after(5,6)
-dl.print()
-dl.print(True)
-dl.remove_at(5)
-dl.print()
-dl.print(True)
-print(dl.length())
+if __name__ == '__main__':
+    dl = DoubleLinkedList()
+    dl.extend(2,3,4)
+    dl.print()
+    dl.print(True)
+    dl.insert_at_first(1)
+    dl.print()
+    dl.print(True)
+    dl.insert_at_last(5)
+    dl.print()
+    dl.print(True)
+    dl.insert_at(4,6)
+    dl.print()
+    dl.print(True)
+    dl.remove(6)
+    dl.print()
+    dl.print(True)
+    dl.insert_after(5,6)
+    dl.print()
+    print(dl.get(3))
+    dl.print(True)
+    dl.print()
+    dl.remove_at(dl.length() - 1)
+    dl.print()
+    dl.print(True)
+    print(dl.length())

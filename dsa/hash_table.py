@@ -1,7 +1,7 @@
 class HashTable:
     def __init__(self):
         self.storage = 10
-        self.array = [[] for i in range(self.storage)]
+        self.array = [[] for _ in range(self.storage)]
     def __hash(self,key):
         h = 0
         for char in key:
@@ -34,7 +34,7 @@ ht['march 6'] = 1
 ht['march 17'] = 2
 ht['march 1'] = 0
 print(ht.array)
-print(ht['march 1'],ht['march 6'],ht['march 17'])
+print(ht['march 1'],ht['march 5'],ht['march 17'])
 del ht['march 1']
 print(ht.array)
 del ht['march 6']

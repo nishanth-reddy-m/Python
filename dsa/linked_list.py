@@ -38,7 +38,10 @@ class LinkedList:
         if index < 0 or index >= self.length():
             raise IndexError('Invalid index')
         if index == 0:
-            self.head = self.head.next
+            if self.head.next:
+                self.head = self.head.next
+                return
+            self.head = None
             return
         count = 0
         itr = self.head
@@ -49,12 +52,12 @@ class LinkedList:
             itr = itr.next
             count += 1
     def insert_at(self,index,data):
-        if index < 0 or index >= self.length():
+        if index < 0 or index > self.length():
             raise IndexError('Invalid index')
         if index == 0:
             self.insert_at_first(data)
             return
-        elif index == self.length() - 1:
+        elif index == self.length():
             self.insert_at_last(data)
             return
         else:
@@ -67,6 +70,21 @@ class LinkedList:
                     break
                 count += 1
                 itr = itr.next
+    def get(self,index):
+        if index < 0 or index > self.length():
+            raise IndexError("Invalid Index")
+        count = 0
+        itr = self.head
+        while itr:
+            if count == index:
+                return itr.data
+            count += 1
+            itr = itr.next
+    def get_all(self):
+        itr = self.head
+        while itr:
+            yield itr.data
+            itr = itr.next
     def insert_after(self,value,data):
         count = 0
         itr = self.head
@@ -91,20 +109,22 @@ class LinkedList:
     def print(self):
         print(' -> '.join(list(self.__iterate())))
 
-ll = LinkedList()
-ll.print()
-ll.extend(2,3,4)
-ll.print()
-ll.insert_at_first(1)
-ll.print()
-ll.insert_at_last(10)
-ll.print()
-ll.insert_after(10,5)
-ll.print()
-ll.remove(10)
-ll.print()
-ll.remove_at(0)
-ll.print()
-ll.insert_at(0,1)
-ll.print()
-print(ll.length())
+if __name__ == "__main__":
+    ll = LinkedList()
+    ll.print()
+    ll.extend(2,3,4)
+    ll.print()
+    ll.insert_at_first(1)
+    ll.print()
+    ll.insert_at_last(10)
+    ll.print()
+    ll.insert_after(10,5)
+    ll.print()
+    ll.remove(10)
+    print(ll.get(3))
+    ll.print()
+    ll.remove_at(0)
+    ll.print()
+    ll.insert_at(0,1)
+    ll.print()
+    print(ll.length())
